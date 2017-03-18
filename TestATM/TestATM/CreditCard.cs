@@ -27,7 +27,7 @@ namespace TestATM
             }
         }
 
-        private int Pin
+        public int Pin
         {
             get { return _pin; }
             set
@@ -65,7 +65,7 @@ namespace TestATM
                 _user = value;
             }
         }
-        private double Cash { get; set; }
+        public double Cash { get; set; }
 
         private DateTime ExpireDate
         {
@@ -77,7 +77,7 @@ namespace TestATM
             get { return _cv2; }
             set { _cv2 = value; }
         }
-        private bool IsBlock
+        public bool IsBlock
         {
             get { return _isBlock; }
             set { _isBlock = value; }

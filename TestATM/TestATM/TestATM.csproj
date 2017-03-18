@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATM.cs" />
+    <Compile Include="CardProvider.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
