@@ -175,6 +175,121 @@ namespace Set
 
         }
 
+        /*
+        [Fact]
+        public void MutationTestV2()
+        {
+
+            const int elementsInFirstArray = 10;
+            const int elementsInSecondArray = 20;
+
+            // TODO: make random array
+            var expectedResult = new ArrayList { 1, 43, 65, 21, 7876, 32, 654, 56 };
+
+            var random = new Random();
+
+            var firstArray = new ArrayList();
+            var secondArray = new ArrayList();
+
+            var maxIndex = expectedResult.Count;
+
+            for (var i = 0; i < elementsInFirstArray; i++)
+            {
+                var index = random.Next(0, maxIndex);
+                firstArray.Add(expectedResult[index]);
+            }
+
+            for (var i = 0; i < elementsInSecondArray; i++)
+            {
+                var index = random.Next(0, maxIndex);
+                secondArray.Add(expectedResult[index]);
+            }
+
+            var set = new Set(firstArray);
+            var givenResult = set.Union(secondArray).Elements;
+
+            Assert.Equal(expectedResult, givenResult);
+
+        }
+        */
+
+        [Fact]
+        public void SubsequenceTest()
+        {
+
+            var expectedResult = new ArrayList { 1, 43, 65, 21, 7876, 32, 654, 56 };
+
+            var random = new Random();
+
+            var firstArray = new ArrayList();
+            var secondArray = new ArrayList();
+
+            var index = random.Next(0, expectedResult.Count);
+
+            for (var i = 0; i < expectedResult.Count; i++)
+            {
+
+                if (i < index)
+                    firstArray.Add(expectedResult[i]);
+                else
+                {
+                    secondArray.Add(expectedResult[i]);
+                }
+            }
+
+            var set = new Set(firstArray);
+            var givenResult = set.Union(secondArray).Elements;
+
+            Assert.Equal(expectedResult, givenResult);
+        }
+
+        [Theory]
+        [InlineData(100000)]
+        public void StressTest(int numOfElements)
+        {
+
+            var numOfElementsInExpectedResult = numOfElements;
+            const int minElement = 100;
+            const int maxElement = 3000000;
+
+            var expectedResult = new ArrayList();
+
+            var random = new Random();
+
+            for (var i = 0; i < numOfElementsInExpectedResult; i++)
+            {
+                expectedResult.Add(random.Next(minElement, maxElement));
+            }
+
+            var expectedResultArray = expectedResult.ToArray().Distinct();
+
+            expectedResult = new ArrayList(expectedResultArray.ToArray());
+
+            var firstArray = new ArrayList();
+            var secondArray = new ArrayList();
+
+            var index = random.Next(0, expectedResult.Count);
+
+            for (var i = 0; i < expectedResult.Count; i++)
+            {
+
+                if (i < index)
+                    firstArray.Add(expectedResult[i]);
+                else
+                {
+                    secondArray.Add(expectedResult[i]);
+                }
+            }
+
+            var set = new Set(firstArray);
+            var givenResult = set.Union(secondArray).Elements;
+
+            Assert.Equal(expectedResult, givenResult);
+
+
+        }
+
+
     }
 
 }
