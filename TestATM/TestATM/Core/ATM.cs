@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestATM
+namespace TestATM.Core
 {
     public class ATM
     {
 
-        public ATM()
+        public ATM(double cash)
         {
+
+            Cash = cash;
             _cardProvider = new CardProvider();
         }
 
@@ -38,6 +40,7 @@ namespace TestATM
                 {
                     throw new ArgumentNullException($"Credit card can't be null");
                 }
+                _creditCard = value;
             }
         }
 
@@ -79,7 +82,7 @@ namespace TestATM
                 throw new ArgumentException("Cash must be positive number");
             }
 
-            if (IsPinCorrect)
+            if (IsPinCorrect && (Cash > cash))
             {
                 CreditCard.Cash -= cash;
                 Cash -= cash;
@@ -87,9 +90,9 @@ namespace TestATM
 
         }
 
-        private void CheckPinCode(int pin)
+        public void CheckPinCode(int pin)
         {
-            if (countOfIncorrectPin > 3)
+            if (_countOfIncorrectPin == 3)
             {
                 BlockCreditCard();
             }
@@ -101,9 +104,21 @@ namespace TestATM
                 }
                 else
                 {
-                    countOfIncorrectPin++;
+                    _countOfIncorrectPin++;
                 }
             }
+        }
+
+        public void GetBackCreditCard()
+        {
+
+            if (CreditCard != null)
+            {
+
+                CreditCard = null;
+                _countOfIncorrectPin = 0;
+            }
+
         }
 
         private void BlockCreditCard()
@@ -114,8 +129,8 @@ namespace TestATM
 
         private double _cash;
         private CreditCard _creditCard;
-        private int countOfIncorrectPin;
-        private CardProvider _cardProvider;
+        private int _countOfIncorrectPin;
+        private readonly CardProvider _cardProvider;
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestATM
+namespace TestATM.Core
 {
     public class CreditCard
     {
@@ -37,7 +37,7 @@ namespace TestATM
 
                 if (paramLength != 4)
                 {
-                    throw new ArgumentNullException($"Passed incorrect PIN length");
+                    throw new ArgumentException($"Passed incorrect PIN length");
 
                 }
                 _pin = value;
@@ -67,21 +67,11 @@ namespace TestATM
         }
         public double Cash { get; set; }
 
-        private DateTime ExpireDate
-        {
-            get { return _expireDate; }
-            set { _expireDate = value; }
-        }
-        private int CV2
-        {
-            get { return _cv2; }
-            set { _cv2 = value; }
-        }
-        public bool IsBlock
-        {
-            get { return _isBlock; }
-            set { _isBlock = value; }
-        }
+        private DateTime ExpireDate { get; set; }
+
+        private int CV2 { get; set; }
+
+        public bool IsBlock { get; set; }
 
 
         public CreditCard(string cardID, int pin, string user, double cash, DateTime expireDate, int cv2, bool isBlock)
@@ -100,10 +90,5 @@ namespace TestATM
         private string _cardId;
         private int _pin;
         private string _user;
-        private DateTime _expireDate;
-        private int _cv2;
-        private bool _isBlock;
-
-
     }
 }
