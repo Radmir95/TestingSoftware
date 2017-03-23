@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestATM.Core
 {
@@ -90,7 +86,7 @@ namespace TestATM.Core
 
         }
 
-        public void CheckPinCode(int pin)
+        public bool CheckPinCode(int pin)
         {
             if (_countOfIncorrectPin == 3)
             {
@@ -101,12 +97,14 @@ namespace TestATM.Core
                 if (CreditCard.Pin == pin)
                 {
                     IsPinCorrect = true;
+                    return true;
                 }
                 else
                 {
                     _countOfIncorrectPin++;
                 }
             }
+            return false;
         }
 
         public void GetBackCreditCard()
@@ -118,6 +116,17 @@ namespace TestATM.Core
                 CreditCard = null;
                 _countOfIncorrectPin = 0;
             }
+
+        }
+
+        public bool IsCardBlock()
+        {
+
+            if (CreditCard != null)
+            {
+                return CreditCard.IsBlock;
+            }
+            throw new ArgumentNullException("Card is null");
 
         }
 
