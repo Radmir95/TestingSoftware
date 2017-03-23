@@ -33,13 +33,12 @@ namespace TestATM.IntegrationTest
             atm.CheckPinCode(6666);
             atm.CheckPinCode(6666);
             atm.CheckPinCode(6666);
-            atm.CheckPinCode(6666);
 
             var t = typeof(ATM);
             var creditCardPropertyInfo = t.GetProperty("CreditCard", BindingFlags.Instance | BindingFlags.NonPublic);
             var creditCard = (CreditCard)creditCardPropertyInfo.GetValue(atm);
 
-            Assert.IsTrue(creditCard.IsBlock);
+            Assert.IsFalse(creditCard.IsBlock);
 
         }
 
@@ -49,6 +48,7 @@ namespace TestATM.IntegrationTest
         {
             var atm = new ATM(10000);
             atm.TakeMoney(-300);
+
         }
 
 
